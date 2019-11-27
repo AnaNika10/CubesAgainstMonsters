@@ -1,9 +1,11 @@
+#include "tabla.h"
+#include "figure.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <GL/glut.h>
-/* Dimenzije prozora */
+// /* Dimenzije prozora */
 static int window_width, window_height;
-
+int lvl=0;
 /* Deklaracije callback funkcija. */
 static void on_keyboard(unsigned char key, int x, int y);
 static void on_reshape(int width, int height);
@@ -37,6 +39,7 @@ int main(int argc, char **argv)
 
 static void on_display(void)
 {
+    
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     /* Podesava se viewport. */
@@ -53,126 +56,9 @@ static void on_display(void)
    // gluLookAt(2, 2, -4, 0, 0, 0, 0, 1, 0);
      gluLookAt(0, 5, 5, 0, 0, 0, 0, 1, 0);
      
-     /*****Gornji deo*********/
-    glColor3f(0.5, 0, 0.5);
-    glutSolidCube(0.6);
-    
-    glTranslatef(-1, 0, 0);
-      glutSolidCube(0.6);
-    glTranslatef(1, 0, 0); 
-   
-      glTranslatef(-2, 0, 0);
-         glutSolidCube(0.6);
-       glTranslatef(2, 0, 0); 
-      
-      glTranslatef(-3, 0, 0);
-         glutSolidCube(0.6);
-       glTranslatef(3, 0, 0); 
-       
-      glTranslatef(1, 0, 0);
-         glutSolidCube(0.6);
-      glTranslatef(-1, 0, 0);
-      
-      glTranslatef(2, 0, 0);
-         glutSolidCube(0.6);
-      glTranslatef(-2, 0, 0);
-      
-      glTranslatef(3, 0, 0);
-         glutSolidCube(0.6);
-      glTranslatef(-3, 0, 0); 
-     /****Kraj gore*****/
-      
-      /*****Desnooooo*****/
-     glTranslatef(3, 0, 1);
-      glutSolidCube(0.6);
-      glTranslatef(-3, 0, -1);
-      
-      
-      glTranslatef(3, 0, 2);
-      glutSolidCube(0.6);
-      glTranslatef(-3, 0, -2);
-      
-      glTranslatef(3, 0, 3);
-      glutSolidCube(0.6);
-      glTranslatef(-3, 0, -3);
-      
-      
-      glTranslatef(3, 0, 4);
-      glutSolidCube(0.6);
-      glTranslatef(-3, 0, -4);
-      
-      
-      glTranslatef(3, 0, 5);
-      glutSolidCube(0.6);
-      glTranslatef(-3, 0, -5);
-      
-    
-      /* Kraajj  Desnoooo*///
-      
-      /********Doleee*********/
-      
-      
-     
-    glTranslatef(0, 0, 5);
-      glutSolidCube(0.6);
-    glTranslatef(0, 0, -5); 
-    
-    glTranslatef(-1, 0, 5);
-      glutSolidCube(0.6);
-    glTranslatef(1, 0, -5); 
-   
-      glTranslatef(-2, 0, 5);
-      glutSolidCube(0.6);
-       glTranslatef(2, 0, -5); 
-      
-    
-      
-      glTranslatef(1, 0, 5);
-      glutSolidCube(0.6);
-      glTranslatef(-1, 0, -5);
-      
-      glTranslatef(2, 0, 5);
-      glutSolidCube(0.6);
-      glTranslatef(-2, 0, -5);
-      
-    
-     
-  /********* Krajj   Doleeeeeeeee*////////
-  
-  
-  
-  /*************LEVOOOO*************/
-  
-      glTranslatef(-3, 0, 1);
-         glutSolidCube(0.6);
-       glTranslatef(3, 0, -1); 
-        
-      glTranslatef(-3, 0, 1);
-         glutSolidCube(0.6);
-      glTranslatef(3, 0, -1);
-      
-      
-      glTranslatef(-3, 0, 2);
-      glutSolidCube(0.6);
-      glTranslatef(3, 0, -2);
-      
-      glTranslatef(-3, 0, 3);
-      glutSolidCube(0.6);
-      glTranslatef(3, 0, -3);
-      
-      
-      glTranslatef(-3, 0, 4);
-      glutSolidCube(0.6);
-      glTranslatef(3, 0, -4);
-      
-      
-      glTranslatef(-3, 0, 5);
-        glColor3f(0, 0.7, 0.2);
-        glutSolidCube(0.6);
-    //  glTranslatef(3, 0, -5);     
-       
-       
-       /**************** Kraj LEVOOOOO*********/
+    kreirajTablu();
+    kreirajPijuna();
+    kreirajCudovista(lvl);
       
     glutSwapBuffers();
 }
@@ -183,7 +69,18 @@ static void on_keyboard(unsigned char key, int x, int y)
         
         exit(0);
         break;
+    case '1': //izaberi lvl 1
+        lvl=1;
+        break;
+    case '2': //izaberi lvl 2
+        lvl=2;
+        break;
+    case '3': //izaberi lvl 3
+        lvl=3;
+        break;
+        
     }
+    glutPostRedisplay();
 }
 static void on_reshape(int width, int height)
 {
