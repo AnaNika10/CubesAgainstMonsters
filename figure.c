@@ -2,15 +2,15 @@
 #include <stdlib.h>
 #include <GL/glut.h>
 #include "figure.h"
-void kreirajPijuna(){
+#include "pomeranje.h"
+void kreirajPijuna(int x,int y,int z){
 
-    
-    glColor3f(0, 0, 1);
-     glTranslatef(-2.5, 1, 5);
+    glColor3f(0.196078,0.196078,0.8);
+     glTranslatef(x,y,z);
      glRotatef(280, 1, 0, 0);
        glutSolidCone(0.2, 1, 50, 50);
      glRotatef(-280, 1, 0, 0);   
-glTranslatef(2.5,-1,-5);     
+    glTranslatef(-x,-y,-z);     
     
 }
 

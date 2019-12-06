@@ -33,7 +33,7 @@ void kreirajTablu(){
      /****Kraj gore*****/
       
       /*****Desnooooo*****/
-     glTranslatef(3, 0, 1);
+      glTranslatef(3, 0, 1);
       glutSolidCube(0.6);
       glTranslatef(-3, 0, -1);
       
@@ -97,10 +97,6 @@ void kreirajTablu(){
          glutSolidCube(0.6);
        glTranslatef(3, 0, -1); 
         
-     // glTranslatef(-3, 0, 1);
-     //    glutSolidCube(0.6);
-    //  glTranslatef(3, 0, -1);
-      
       
       glTranslatef(-3, 0, 2);
       glutSolidCube(0.6);
