@@ -98,9 +98,9 @@ void kreirajCudovista(int key){
         glutSolidSphere(0.3,10,10);
     glTranslatef(-3, -0.7, -4);
       
-    glTranslatef(-1, 0.7, 5);
-        glutSolidSphere(0.3,10,10);
-    glTranslatef(1, -0.7, -5);
+   // glTranslatef(-1, 0.7, 5);
+   //     glutSolidSphere(0.3,10,10);
+   // glTranslatef(1, -0.7, -5);
     
     glTranslatef(1, 0.7, 5);
         glutSolidSphere(0.3,10,10);

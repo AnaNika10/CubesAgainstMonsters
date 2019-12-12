@@ -2,6 +2,6 @@
 #define DRAW_H3
 void Kocke(void);
 int random_num();
-void Tacke1(int broj);
-void Tacke2(int broj);
+void Tacke1(int broj,int state);
+void Tacke2(int broj,int state);
 #endif

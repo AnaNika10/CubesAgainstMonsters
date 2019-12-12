@@ -4,19 +4,19 @@
 #include <time.h> 
 #include "kocka.h"
 #include "pomeranje.h"
+ 
 void Kocke(){
 
-    //glColor3f(0.419608,0.556863,0.137255); 
-    //glColor3f(0.184314,0.309804,0.184314);
-    //glColor3f(0.4392160,0.576471,0.858824);
-    glColor3f(0.196078,0.196078,0.8);
+    
+    //glColor3f(0.196078,0.196078,0.8);
+    glColor3f(0, 0.7, 0.2);
     glBegin(GL_POLYGON);
        glVertex3f(2.0f, 5.0f, -2.0f); // top left
        glVertex3f(4.0f, 5.0f, -2.0f); // top right 
        glVertex3f(4.0f, 3.0f, 0.0f); // bottom right
        glVertex3f(2.0f, 3.0f, 0.0f); // bottom left
     glEnd();
-
+    glColor3f(1,0,0);
    glBegin(GL_POLYGON);
        glVertex3f(5.0f, 5.0f, -2.0f); // top left
        glVertex3f(7.0f, 5.0f, -2.0f); // top right 
@@ -26,16 +26,15 @@ void Kocke(){
 }
 int random_num(){
     
-    srand(time(NULL));
 
     int nRandonNumber = rand()%6 + 1;
-    //printf("%d\n",nRandonNumber);
 
     return nRandonNumber;
 
 }
-void Tacke1(int broj){
+void Tacke1(int broj,int state){
   // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    if(state==1){
    glColor3f(0,0,0);
     glPointSize(15);
     if(broj==1){
@@ -67,8 +66,9 @@ void Tacke1(int broj){
        glVertex3f(2.2f, 3.4f, 0.0f); //bottom left //0
     glEnd();
     glFlush();
-    
-}
+     }
+   
+
 else if(broj==5){
     glBegin(GL_POINTS);
         glVertex3f(2.5f, 4.7f, -2.0f); // top left //-2
@@ -95,9 +95,10 @@ else if(broj==6){
     glFlush();
     
     }
+     }
 }
-void Tacke2(int broj){
-  // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+void Tacke2(int broj,int state){
+  if(state==1){
    glColor3f(0,0,0);
     glPointSize(15);
     if(broj==1){
@@ -158,4 +159,5 @@ else if(broj==6){
     glFlush();
     
     }
+  }
 }
