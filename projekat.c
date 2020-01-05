@@ -12,25 +12,31 @@
 // /* Dimenzije prozora */
 
 // Pobeda/poraz
-#define TIMER_INTERVAL 20
-#define TIMER_ID 0
+#define TIMER_INTERVAL1 20
+#define TIMER_INTERVAL2 20
+#define TIMER_ID0 0
+#define TIMER_ID1 1
 #define PI 3.14159265359
-void on_timer(int id);
+void on_timer1(int id);
+void on_timer2(int id);
 float animation_parameterX=0;
 float animation_parameterY = 0;
 float animation_parameterZ = 0;
-float animation_parameter_sphere=0;
+float animation_parameter_sphere=0.7;
 int putanja=0;
-int animation_ongoing = 0;
+int animation_ongoing1 = 0;
+int animation_ongoing2 = 0;
 static int window_width, window_height;
 int lvl=0;
 int randombr1;
 int randombr2;
 int kockica;
 int pomeraj=0;
+int *goaway;
 int playable=1;
-int mesto,mesto1;
+int mesto,mesto1,obrisi;
 int fight=0;
+int flagporuka=1;
 int *goaway;
 int zivoti=3;
 char *zivotistring="LIVES:";
@@ -100,9 +106,13 @@ static void on_display(void)
     glLoadIdentity();
   
     gluLookAt(0, 5, 5, 0, 0, 0, 0, 1, 0); 
-   
+    if(flagporuka)
+        iscrtajPoruku(); 
     iscrtajZivote(zivotistring,nizzivota); //Iscrta prikaz zivota
-     
+    if(!zivoti)
+        iscrtajGameOver();
+    if(pomeraj>=22)
+        iscrtajCongrats();
    /*Iscrtava elemente: tablu, kocke, i u odnosu na zeljeni nivo postavlja kreirajCudovista*/
     glPushMatrix();
         Kocke();
@@ -110,29 +120,11 @@ static void on_display(void)
         Tacke2(randombr2,state_attack);
         kreirajTablu();
     glPopMatrix();
-    glPushMatrix();
     
-    /*switch(lvl){
-        case 1:
-            mesto=pronadji(lvl1_zamke,5,pomeraj);
-            mesto1=pronadji(lvl1_zamke,5,pomeraj+1);
-            if(mesto!=-1)
-                goaway[mesto]=1;
-            else if(mesto1!=-1)
-                goaway[mesto1]=1;
-            break;
-        case 2:
-            mesto=pronadji(lvl1_zamke,7,pomeraj);
-            mesto1=pronadji(lvl1_zamke,7,pomeraj+1);
-            if(mesto!=-1)
-                goaway[mesto]=1;
-            else if(mesto1!=-1)
-                goaway[mesto1]=1;
-            break;
-    }*/
-        kreirajCudovista(lvl);
+    glPushMatrix();
+        kreirajCudovista(lvl,goaway,animation_parameter_sphere);
     glPopMatrix();
-  
+    
         glPushMatrix();
             glTranslatef(animation_parameterX*1.2,1.5*fabs(sin(PI*animation_parameterY/360)), -animation_parameterZ*1.2);
             kreirajPijuna(pozicije[0].x,pozicije[0].y,pozicije[0].z);
@@ -155,29 +147,28 @@ static void on_keyboard(unsigned char key, int x, int y)
         break;
     case '1': //izaberi lvl 1
         lvl=1;
-      //  goaway=(int*)calloc(5,sizeof(int)); 
+        flagporuka=0;
+        goaway=(int*)calloc(5,sizeof(int)); 
         break;
     case '2': //izaberi lvl 2
         lvl=2;
-        //goaway=(int*)calloc(7,sizeof(int));
+        flagporuka=0;
+        goaway=(int*)calloc(7,sizeof(int));
         break;
     case '3': //izaberi lvl 3
         lvl=3;
-       // goaway=(int*)calloc(9,sizeof(int));
+        flagporuka=0;
+        goaway=(int*)calloc(9,sizeof(int));
         break;
-    case 'c':
-        if(playable)
+    case 'c':            
+        if(playable && !animation_ongoing1)
             randombr1=random_num();
         else 
             randombr1=0;
         kockica=randombr1;
-        
         pomeraj=igraj(randombr1,pomeraj,playable);
         
-        if(pomeraj>=22){
-            printf("Congrats!!!");
-            
-        }
+    
         if(lvl==1){
         for(int i=0;i<5;i++)
             if(pomeraj==lvl1_zamke[i])
@@ -228,16 +219,20 @@ static void on_keyboard(unsigned char key, int x, int y)
        
         
         }
-       
-            if (!animation_ongoing) {
-                animation_ongoing=1;
-            glutTimerFunc(TIMER_INTERVAL, on_timer, TIMER_ID);
+        /*int j;
+        for(j=0;j<5;j++){
+            if(pomeraj>=lvl1_zamke[j])
+                goaway[j]=1;
+         }*/
+            if (!animation_ongoing1) {
+                animation_ongoing1=1;
+            glutTimerFunc(TIMER_INTERVAL1, on_timer1, TIMER_ID0);
             }
         
         break;
     case 'v':
         if(!playable)
-            randombr2=random_num();
+            randombr2=4;//random_num();
         else 
             randombr2=0;
         if(fight==1)
@@ -249,15 +244,42 @@ static void on_keyboard(unsigned char key, int x, int y)
                 glClearColor(0.25, 1, 0.25, 0);
                 switch(lvl){
                     case 1:
-                        if(obrisi_element(lvl1_zamke,5,pomeraj))
+                        mesto=pronadji(lvl1_zamke,5,pomeraj);
+                        mesto1=pronadji(lvl1_zamke,5,pomeraj+1);
+                        if(mesto>mesto1)
+                            obrisi=mesto;
+                        else
+                            obrisi=mesto1;
+                        goaway[obrisi]=1;
+                        if (!animation_ongoing1) {
+                               animation_ongoing1=1;
+                               animation_parameter_sphere=0.7;
+                        glutTimerFunc(TIMER_INTERVAL2, on_timer2, TIMER_ID1);
+                        }
+                        if(obrisi_element(lvl1_zamke,5,pomeraj)){
                             obrisi_element(lvl1,10,pomeraj);
+                            
+                        }
                         else if(obrisi_element(lvl1_zamke,5,pomeraj+1)){
                         obrisi_element(lvl1,10,pomeraj);
                         obrisi_element(lvl1,10,pomeraj+1);
+                        
                         }
-                        else printf("Greska!!");
+                     
                         break;     
                     case 2:
+                        mesto=pronadji(lvl2_zamke,7,pomeraj);
+                        mesto1=pronadji(lvl2_zamke,7,pomeraj+1);
+                        if(mesto>mesto1)
+                            obrisi=mesto;
+                        else
+                            obrisi=mesto1;
+                        goaway[obrisi]=1;
+                        if (!animation_ongoing1) {
+                               animation_ongoing1=1;
+                               animation_parameter_sphere=0.7;
+                        glutTimerFunc(TIMER_INTERVAL2, on_timer2, TIMER_ID1);
+                        }
                         if(obrisi_element(lvl2_zamke,7,pomeraj))
                             obrisi_element(lvl2,14,pomeraj);
                         else{
@@ -267,6 +289,18 @@ static void on_keyboard(unsigned char key, int x, int y)
                         } 
                         break;
                     case 3: 
+                        mesto=pronadji(lvl3_zamke,9,pomeraj);
+                        mesto1=pronadji(lvl3_zamke,9,pomeraj+1);
+                        if(mesto>mesto1)
+                            obrisi=mesto;
+                        else
+                            obrisi=mesto1;
+                        goaway[obrisi]=1;
+                        if (!animation_ongoing1) {
+                               animation_ongoing1=1;
+                               animation_parameter_sphere=0.7;
+                        glutTimerFunc(TIMER_INTERVAL2, on_timer2, TIMER_ID1);
+                        }
                         if(obrisi_element(lvl3_zamke,9,pomeraj))
                             obrisi_element(lvl3,18,pomeraj);
                         else{
@@ -286,12 +320,8 @@ static void on_keyboard(unsigned char key, int x, int y)
                 zivoti--;
                 nizzivota+=2;
                 if(zivoti==0){
-                //printf("Game over!");
-                
+                printf("Game over!");
                 nizzivota=" ";
-                //iscrtajGameOver();
-                
-                //exit(0);
                 }
             }
         }
@@ -306,24 +336,24 @@ static void on_reshape(int width, int height)
     window_width = width;
     window_height = height;
 }
- void on_timer(int id) {
-    if (id == TIMER_ID) {
+ void on_timer1(int id) {
+    if (id == TIMER_ID0) {
     
-       
         
         if (animation_parameterY >= randombr1*360) {
-            animation_ongoing = 0;
+            animation_ongoing1 = 0;
             animation_parameterY=0;
             
             return;
         }
         
         if (animation_parameterZ+animation_parameterX>=pomeraj ) {
-            animation_ongoing=0;
+            animation_ongoing1=0;
             animation_parameterZ=0;
             animation_parameterX=0;
             return;
         }
+        
         if(putanja==0){
         if(animation_parameterZ>=4.2){
              animation_parameterZ=4.2f;
@@ -363,15 +393,32 @@ static void on_reshape(int width, int height)
         animation_parameterX-=0.047f;
         
         }
-            
-        animation_parameter_sphere-=0.05f;    
+         
         animation_parameterY += 20;
     }
-
+    
     glutPostRedisplay();
 
-    if (animation_ongoing) {
-        glutTimerFunc(TIMER_INTERVAL, on_timer, TIMER_ID);
+    if (animation_ongoing1) {
+        glutTimerFunc(TIMER_INTERVAL1, on_timer1, TIMER_ID0);
     }
     
+    
+}
+void on_timer2(int id) {
+   
+    if (id == TIMER_ID1) {
+        
+        if(animation_parameter_sphere<=-10){
+            animation_parameter_sphere=0.7;
+            animation_ongoing1=0;
+            goaway[obrisi]=2;            
+            
+        }
+        animation_parameter_sphere-=0.5;  
+    }
+    glutPostRedisplay();
+   if (animation_ongoing1) {
+        glutTimerFunc(TIMER_INTERVAL2, on_timer2, TIMER_ID1);
+    } 
 }

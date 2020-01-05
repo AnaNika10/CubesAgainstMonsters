@@ -14,106 +14,214 @@ void kreirajPijuna(int x,int y,int z){
     
 }
 
-void kreirajCudovista(int key){
+void kreirajCudovista(int key,int *goaway,int animation_parameter_sphere){
     
     glColor3f(0, 0, 0);
+    /*********** Iscrtavanje loptica za nivo 1*********////
     if(key==1){
-    //if(!goaway[2]) {   
-    glTranslatef(0, 0.7, 0);
+    if(goaway[1]!=2){
+    glPushMatrix();
+        glColor3f(0, 0, 0);
+        if(!goaway[1])
+            glTranslatef(0, 0.7, 0);         
+        else
+            glTranslatef(0,animation_parameter_sphere,0);
         glutSolidSphere(0.3,10,10);
-    glTranslatef(0, -0.7, 0);
-    //}
-    //if(!goaway[0]){
-    glTranslatef(-3, 0.7, 1);
-        glutSolidSphere(0.3,10,10);
-    glTranslatef(3, -0.7, -1);
-   // }
-    //if(!goaway[4]){
-    glTranslatef(2, 0.7, 5);
-        glutSolidSphere(0.3,10,10);
-    glTranslatef(-2, -0.7, -5);
-   // }
-   // if(!goaway[3]){
-    glTranslatef(3, 0.7, 2);
-        glutSolidSphere(0.3,10,10);
-    glTranslatef(-3, -0.7, -2);
-    //}
-    //if(!goaway[1]){
-    glTranslatef(-2, 0.7, 5);
-        glutSolidSphere(0.3,10,10);
-    glTranslatef(2, -0.7, -5);
-    //}
-   } else if(key==2){
-    glTranslatef(-1, 0.7, 0);
-        glutSolidSphere(0.3,10,10);
-    glTranslatef(1, -0.7, 0);
-      
-    glTranslatef(2, 0.7, 0);
-        glutSolidSphere(0.3,10,10);
-    glTranslatef(-2, -0.7, 0);
-      
-    glTranslatef(3, 0.7, 2);
-        glutSolidSphere(0.3,10,10);
-    glTranslatef(-3, -0.7, -2);
-      
-    glTranslatef(3, 0.7, 5);
-        glutSolidSphere(0.3,10,10);
-    glTranslatef(-3, -0.7, -5);
-      
-    glTranslatef(-1, 0.7, 5);
-        glutSolidSphere(0.3,10,10);
-    glTranslatef(1, -0.7, -5);
-    
-    glTranslatef(-3, 0.7, 1);
-        glutSolidSphere(0.3,10,10);
-    glTranslatef(3, -0.7, -1);
-      
-    glTranslatef(-3, 0.7, 3);
-        glutSolidSphere(0.3,10,10);
-    glTranslatef(3, -0.7, -3);
-        
+   glPopMatrix();
     }
+    if(goaway[0]!=2){
+   glPushMatrix();
+        glColor3f(0, 0, 0);
+        if(!goaway[0])
+                 glTranslatef(-3,0.7,1);
+         else
+                  glTranslatef(-3,animation_parameter_sphere,1);
+       
+        glutSolidSphere(0.3,10,10);
+    glPopMatrix();
+    } 
+    if(goaway[3]!=2){
+    glPushMatrix();
+        glColor3f(0, 0, 0);
+        if(!goaway[3])
+            glTranslatef(2, 0.7, 5);
+        else 
+             glTranslatef(2, animation_parameter_sphere, 5);
+         
+        glutSolidSphere(0.3,10,10);
+    glPopMatrix();
+   }
+   if(goaway[2]!=2){
+    glPushMatrix();
+        glColor3f(0, 0, 0);
+        if(!goaway[2])
+        glTranslatef(3, 0.7, 2);
+         else 
+             glTranslatef(3, animation_parameter_sphere, 2);
+        glutSolidSphere(0.3,10,10);
+    glPopMatrix();
+    }
+     if(goaway[4]!=2){
+    glPushMatrix();
+        glColor3f(0, 0, 0);
+        if(!goaway[4])
+        glTranslatef(-2, 0.7, 5);
+        
+        else 
+            glTranslatef(-2, animation_parameter_sphere, 5);
+        glutSolidSphere(0.3,10,10);
+    glPopMatrix();
+    }
+   }
+   /*********** Iscrtavanje loptica za nivo 2*********////
+   else if(key==2){
+     if(goaway[2]!=2){  
+    glPushMatrix();
+        glColor3f(0, 0, 0);
+        if(!goaway[2])
+            glTranslatef(-1, 0.7, 0);
+        else glTranslatef(-1,animation_parameter_sphere, 0);
+        glutSolidSphere(0.3,10,10);
+    glPopMatrix();
+    }
+    if(goaway[3]!=2){ 
+    glPushMatrix();
+        glColor3f(0, 0, 0);  
+         if(!goaway[3])
+            glTranslatef(2, 0.7, 0);
+         else glTranslatef(2, animation_parameter_sphere, 0);
+        glutSolidSphere(0.3,10,10);
+    glPopMatrix();
+    }
+    if(goaway[4]!=2){
+    glPushMatrix();
+        glColor3f(0, 0, 0);
+        if(!goaway[4])
+            glTranslatef(3, 0.7, 2);
+        else  glTranslatef(3, animation_parameter_sphere, 2);
+        glutSolidSphere(0.3,10,10);
+    glPopMatrix();
+    }
+    if(goaway[5]!=2){
+    glPushMatrix();
+        glColor3f(0, 0, 0);  
+        if(!goaway[5])
+            glTranslatef(3, 0.7, 5);
+        else glTranslatef(3, animation_parameter_sphere, 5);
+        glutSolidSphere(0.3,10,10);
+    glPopMatrix();
+    }
+    if(goaway[6]!=2){
+     glPushMatrix();
+        glColor3f(0, 0, 0);
+        if(!goaway[6])
+            glTranslatef(-1, 0.7, 5);
+        else glTranslatef(-1, animation_parameter_sphere, 5);
+        glutSolidSphere(0.3,10,10);
+    glPopMatrix();
+    }
+    if(goaway[1]!=2){
+    glPushMatrix();
+        glColor3f(0, 0, 0);
+        if(!goaway[1])
+            glTranslatef(-3, 0.7, 1);
+        else glTranslatef(-3, animation_parameter_sphere, 1);
+        glutSolidSphere(0.3,10,10);
+   glPopMatrix();
+    }
+    if(goaway[0]!=2){
+    glPushMatrix();
+        glColor3f(0, 0, 0);  
+        if(!goaway[0])
+            glTranslatef(-3, 0.7, 3);
+        else glTranslatef(-3, animation_parameter_sphere, 3);
+        glutSolidSphere(0.3,10,10);
+    glPopMatrix();
+    }
+    }
+    /*********** Iscrtavanje loptica za nivo 3*********////
     else if(key==3){
-    glTranslatef(-3, 0.7, 3);
+    if(goaway[0]!=2){
+    glPushMatrix();
+        glColor3f(0, 0, 0);
+        if(!goaway[0])
+            glTranslatef(-3, 0.7, 3);
+        else glTranslatef(-3,animation_parameter_sphere, 3);
         glutSolidSphere(0.3,10,10);
-    glTranslatef(3, -0.7, -3);
-      
-    glTranslatef(1, 0.7, 0);
+      glPopMatrix();
+    }
+    if(goaway[3]!=2){
+    glPushMatrix();
+        glColor3f(0, 0, 0);
+        if(!goaway[3])
+            glTranslatef(1, 0.7, 0);
+        else  glTranslatef(1, animation_parameter_sphere, 0);
         glutSolidSphere(0.3,10,10);
-    glTranslatef(-1, -0.7, 0);
-      
-    glTranslatef(-2, 0.7, 0);
+      glPopMatrix();
+    }
+    if(goaway[2]!=2){
+    glPushMatrix();
+        glColor3f(0, 0, 0);
+        if(!goaway[2])
+            glTranslatef(-2, 0.7, 0);
+        else glTranslatef(-2, animation_parameter_sphere, 0);
         glutSolidSphere(0.3,10,10);
-    glTranslatef(2, -0.7, 0);
-      
-    glTranslatef(3, 0.7, 0);
+      glPopMatrix();
+    }
+    if(goaway[4]!=2){
+     glPushMatrix();
+        glColor3f(0, 0, 0);
+        if(!goaway[4])
+            glTranslatef(3, 0.7, 0);
+        else  glTranslatef(3, animation_parameter_sphere, 0);
         glutSolidSphere(0.3,10,10);
-    glTranslatef(-3, -0.7, 0);
-      
-    glTranslatef(-3, 0.7, 1);
+      glPopMatrix();
+    }
+    if(goaway[1]!=2){
+     glPushMatrix();
+        glColor3f(0, 0, 0);
+        if(!goaway[1])
+            glTranslatef(-3, 0.7, 1);
+        else glTranslatef(-3, animation_parameter_sphere, 1);
         glutSolidSphere(0.3,10,10);
-    glTranslatef(3, -0.7, -1);
-      
-    
-    glTranslatef(3, 0.7, 2);
+      glPopMatrix();
+    }
+    if(goaway[5]!=2){
+    glPushMatrix();
+        glColor3f(0, 0, 0);
+        if(!goaway[5])
+            glTranslatef(3, 0.7, 2);
+        else glTranslatef(3, animation_parameter_sphere, 2);
         glutSolidSphere(0.3,10,10);
-    glTranslatef(-3, -0.7, -2);
-    
-    glTranslatef(3, 0.7, 4);
+    glPopMatrix();
+    }
+    if(goaway[6]!=2){
+    glPushMatrix();
+        glColor3f(0, 0, 0);
+        if(!goaway[6])
+            glTranslatef(3, 0.7, 4);
+        else glTranslatef(3, animation_parameter_sphere, 4);
         glutSolidSphere(0.3,10,10);
-    glTranslatef(-3, -0.7, -4);
-      
-   // glTranslatef(-1, 0.7, 5);
-   //     glutSolidSphere(0.3,10,10);
-   // glTranslatef(1, -0.7, -5);
-    
-    glTranslatef(1, 0.7, 5);
+    glPopMatrix();
+    }  
+    if(goaway[7]!=2){
+    glPushMatrix();
+        glColor3f(0, 0, 0);
+        if(!goaway[7])
+            glTranslatef(1, 0.7, 5);
+        else glTranslatef(1, animation_parameter_sphere, 5);
         glutSolidSphere(0.3,10,10);
-    glTranslatef(-1, -0.7, -5);
-      
-    glTranslatef(-2, 0.7, 5);
+      glPopMatrix();
+    }
+    if(goaway[8]!=2){
+     glPushMatrix();
+        glColor3f(0, 0, 0); 
+        if(!goaway[8])
+            glTranslatef(-2, 0.7, 5);
+        else  glTranslatef(-2, animation_parameter_sphere, 5);
         glutSolidSphere(0.3,10,10);
-    glTranslatef(2, -0.7, -5);
+     glPopMatrix();
+    }
 }
 
     

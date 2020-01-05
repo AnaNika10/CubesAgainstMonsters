@@ -4,57 +4,61 @@
 #include "tabla.h"
 void kreirajTablu(){
 /*****Gornji deo*********/
-    glColor3f(0.5, 0, 0.5);
-    glutSolidCube(0.6);
-    
+   glPushMatrix();
+        glColor3f(0.5, 0, 0.5);
+        glutSolidCube(0.6);
+   glPopMatrix(); 
+    glPushMatrix();
     glTranslatef(-1, 0, 0);
       glutSolidCube(0.6);
-    glTranslatef(1, 0, 0); 
-   
+   glPopMatrix(); 
+    glPushMatrix();
       glTranslatef(-2, 0, 0);
          glutSolidCube(0.6);
-       glTranslatef(2, 0, 0); 
-      
+       glPopMatrix(); 
+       glPushMatrix();
       glTranslatef(-3, 0, 0);
          glutSolidCube(0.6);
-       glTranslatef(3, 0, 0); 
-       
+      glPopMatrix(); 
+        glPushMatrix();
       glTranslatef(1, 0, 0);
          glutSolidCube(0.6);
-      glTranslatef(-1, 0, 0);
-      
+      glPopMatrix(); 
+       glPushMatrix();
       glTranslatef(2, 0, 0);
          glutSolidCube(0.6);
-      glTranslatef(-2, 0, 0);
-      
+     glPopMatrix(); 
+     
+       glPushMatrix();
       glTranslatef(3, 0, 0);
          glutSolidCube(0.6);
-      glTranslatef(-3, 0, 0); 
+     glPopMatrix(); 
      /****Kraj gore*****/
       
       /*****Desnooooo*****/
+       glPushMatrix();
       glTranslatef(3, 0, 1);
       glutSolidCube(0.6);
-      glTranslatef(-3, 0, -1);
+      glPopMatrix(); 
       
-      
+       glPushMatrix();
       glTranslatef(3, 0, 2);
       glutSolidCube(0.6);
-      glTranslatef(-3, 0, -2);
-      
+     glPopMatrix(); 
+       glPushMatrix();
       glTranslatef(3, 0, 3);
       glutSolidCube(0.6);
-      glTranslatef(-3, 0, -3);
+      glPopMatrix(); 
       
-      
+       glPushMatrix();
       glTranslatef(3, 0, 4);
       glutSolidCube(0.6);
-      glTranslatef(-3, 0, -4);
+      glPopMatrix(); 
       
-      
+       glPushMatrix();
       glTranslatef(3, 0, 5);
       glutSolidCube(0.6);
-      glTranslatef(-3, 0, -5);
+      glPopMatrix(); 
       
     
       /* Kraajj  Desnoooo*///
@@ -62,28 +66,31 @@ void kreirajTablu(){
       /********Doleee*********/
       
       
-     
+      glPushMatrix();
     glTranslatef(0, 0, 5);
       glutSolidCube(0.6);
-    glTranslatef(0, 0, -5); 
-    
+   glPopMatrix(); 
+   
+     glPushMatrix();
     glTranslatef(-1, 0, 5);
       glutSolidCube(0.6);
-    glTranslatef(1, 0, -5); 
-   
+    glPopMatrix(); 
+    
+    glPushMatrix();
       glTranslatef(-2, 0, 5);
       glutSolidCube(0.6);
-       glTranslatef(2, 0, -5); 
+       glPopMatrix(); 
       
     
-      
+       glPushMatrix();
       glTranslatef(1, 0, 5);
       glutSolidCube(0.6);
-      glTranslatef(-1, 0, -5);
+      glPopMatrix(); 
       
+       glPushMatrix();
       glTranslatef(2, 0, 5);
       glutSolidCube(0.6);
-      glTranslatef(-2, 0, -5);
+     glPopMatrix(); 
       
     
      
@@ -92,30 +99,31 @@ void kreirajTablu(){
   
   
   /*************LEVOOOO*************/
-  
+      glPushMatrix();
       glTranslatef(-3, 0, 1);
          glutSolidCube(0.6);
-       glTranslatef(3, 0, -1); 
+      glPopMatrix(); 
         
-      
+       glPushMatrix();
       glTranslatef(-3, 0, 2);
       glutSolidCube(0.6);
-      glTranslatef(3, 0, -2);
-      
+     glPopMatrix(); 
+     
+       glPushMatrix();
       glTranslatef(-3, 0, 3);
       glutSolidCube(0.6);
-      glTranslatef(3, 0, -3);
+    glPopMatrix(); 
       
-      
+       glPushMatrix();
       glTranslatef(-3, 0, 4);
       glutSolidCube(0.6);
-      glTranslatef(3, 0, -4);
+      glPopMatrix(); 
       
-      
+       glPushMatrix();
       glTranslatef(-3, 0, 5);
         glColor3f(0, 0.7, 0.2);
         glutSolidCube(0.6);
-      glTranslatef(3, 0, -5);     
+     glPopMatrix(); 
        
        
        /**************** Kraj LEVOOOOO*********/
