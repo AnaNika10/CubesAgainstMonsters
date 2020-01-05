@@ -1,5 +1,5 @@
-#ifndef DRAW_H1
-#define DRAW_H1
+#ifndef DRAW_Htabla
+#define DRAW_Htabla
 
 void kreirajTablu(void);
 

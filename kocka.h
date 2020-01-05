@@ -1,5 +1,5 @@
-#ifndef DRAW_H3
-#define DRAW_H3
+#ifndef DRAW_Hkocka
+#define DRAW_Hkocka
 void Kocke(void);
 int random_num();
 void Tacke1(int broj,int state);

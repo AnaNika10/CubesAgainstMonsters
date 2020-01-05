@@ -5,13 +5,11 @@
 #include "pomeranje.h"
 #include "tabla.h"
 #include "figure.h"
-int pocetna_poz=0;
-int igraj(int broj,int playable){
+int igraj(int broj,int pomeraj,int playable){
     if(playable)
-    return pocetna_poz+=broj;
+    return pomeraj+=broj;
     else {
-    printf("BORBA\n");
-    return pocetna_poz;
+    return pomeraj;
     }
 }
 

@@ -1,10 +1,10 @@
-#ifndef DRAW_H4
-#define DRAW_H4
+#ifndef DRAW_Hpomeranje
+#define DRAW_Hpomeranje
 typedef struct Tuple{
     int x;
     int y;
     int z;
 } tuple;
-int igraj(int broj,int playable);
+int igraj(int broj,int pomeraj,int playable);
 
 #endif
