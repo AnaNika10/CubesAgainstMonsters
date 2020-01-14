@@ -7,8 +7,7 @@
  
 void Kocke(){
 
-    
-    //glColor3f(0.196078,0.196078,0.8);
+   //crta zeleni kvadrat koji predstavlja kocku za pomeranje
     glColor3f(0, 0.7, 0.2);
     glBegin(GL_POLYGON);
        glVertex3f(2.0f, 5.0f, -2.0f); // top left
@@ -16,6 +15,9 @@ void Kocke(){
        glVertex3f(4.0f, 3.0f, 0.0f); // bottom right
        glVertex3f(2.0f, 3.0f, 0.0f); // bottom left
     glEnd();
+   
+   
+    //crta crveni kvadrat koji predstavlja kocku za borbu
     glColor3f(1,0,0);
    glBegin(GL_POLYGON);
        glVertex3f(5.0f, 5.0f, -2.0f); // top left
@@ -24,6 +26,7 @@ void Kocke(){
        glVertex3f(5.0f, 3.0f, 0.0f); //bottom left
     glEnd();
 }
+//vraca pseudo-slucajni broj
 int random_num(){
     
 
@@ -32,8 +35,10 @@ int random_num(){
     return nRandonNumber;
 
 }
+// iscrtava tackice na kocki u zavisnosti od dobijenog broja
 void Tacke1(int broj,int state){
-  // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
+
     if(state==1){
    glColor3f(0,0,0);
     glPointSize(15);
@@ -96,8 +101,10 @@ else if(broj==6){
     
     }
      }
+
 }
 void Tacke2(int broj,int state){
+  
   if(state==1){
    glColor3f(0,0,0);
     glPointSize(15);

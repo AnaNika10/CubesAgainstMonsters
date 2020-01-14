@@ -3,31 +3,33 @@
 #include <GL/glut.h>
 #include "figure.h"
 #include "pomeranje.h"
-void kreirajPijuna(int x,int y,int z){
-
-    glColor3f(0.196078,0.196078,0.8);
-     glTranslatef(x,y,z);
-     glRotatef(280, 1, 0, 0);
+void kreirajPiona(int x,int y,int z){
+ 
+    glPushMatrix();
+        glColor3f(0.196078,0.196078,0.8);
+        glTranslatef(x,y,z); //translacija za ove pozicije zbog animacije
+        glRotatef(280, 1, 0, 0); //rotacija da bi bio uspravan konus
        glutSolidCone(0.2, 1, 50, 50);
-     glRotatef(-280, 1, 0, 0);   
-    glTranslatef(-x,-y,-z);     
+ 
+    glPopMatrix();   
     
 }
 
-void kreirajCudovista(int key,int *goaway,int animation_parameter_sphere){
+void kreirajCudovista(int key,int *goaway,int animation_parameter_sphere){    
     
-    glColor3f(0, 0, 0);
     /*********** Iscrtavanje loptica za nivo 1*********////
+   // u zavisnoti od elementa niza goaway na poziciji koja predstavlja pomeraj uradi nesto loptici
     if(key==1){
-    if(goaway[1]!=2){
+    if(goaway[1]!=2){ //ako je 2 ne iscrtavaj je
+        
     glPushMatrix();
         glColor3f(0, 0, 0);
-        if(!goaway[1])
-            glTranslatef(0, 0.7, 0);         
+        if(!goaway[1])  //ako je je 0 onda nacrtaj na polju
+            glTranslatef(0, 0.7, 0);        //treca loptica 
         else
-            glTranslatef(0,animation_parameter_sphere,0);
+            glTranslatef(0,animation_parameter_sphere,0); //u protivnom crtaj preko animacije
         glutSolidSphere(0.3,10,10);
-   glPopMatrix();
+    glPopMatrix();
     }
     if(goaway[0]!=2){
    glPushMatrix();
@@ -73,6 +75,11 @@ void kreirajCudovista(int key,int *goaway,int animation_parameter_sphere){
     glPopMatrix();
     }
    }
+   
+   
+   
+   
+   
    /*********** Iscrtavanje loptica za nivo 2*********////
    else if(key==2){
      if(goaway[2]!=2){  
@@ -139,6 +146,12 @@ void kreirajCudovista(int key,int *goaway,int animation_parameter_sphere){
     glPopMatrix();
     }
     }
+    
+    
+    
+    
+    
+    
     /*********** Iscrtavanje loptica za nivo 3*********////
     else if(key==3){
     if(goaway[0]!=2){
@@ -226,6 +239,7 @@ void kreirajCudovista(int key,int *goaway,int animation_parameter_sphere){
 
     
 }
+// vraca poziciju trazenog elementa
 int pronadji(int *niz,int n,int vrednost)
 {
      int nasao=0;
@@ -243,7 +257,7 @@ int pronadji(int *niz,int n,int vrednost)
         return -1;
 }
 
-
+// postavlja nulu na poziciju gde je bila zadata vrednost
 int obrisi_element(int *niz,int n,int vrednost)
 {
    int uspesno=0;

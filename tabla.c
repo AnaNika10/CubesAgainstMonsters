@@ -2,63 +2,64 @@
 #include <stdlib.h>
 #include <GL/glut.h>
 #include "tabla.h"
+//Funkcija crta polja
 void kreirajTablu(){
 /*****Gornji deo*********/
    glPushMatrix();
-        glColor3f(0.5, 0, 0.5);
+        glColor3f(0.9, 0.7, 0.5);
         glutSolidCube(0.6);
    glPopMatrix(); 
-    glPushMatrix();
-    glTranslatef(-1, 0, 0);
-      glutSolidCube(0.6);
+   glPushMatrix();
+        glTranslatef(-1, 0, 0);
+        glutSolidCube(0.6);
    glPopMatrix(); 
-    glPushMatrix();
+   glPushMatrix();
       glTranslatef(-2, 0, 0);
-         glutSolidCube(0.6);
-       glPopMatrix(); 
-       glPushMatrix();
+      glutSolidCube(0.6);
+    glPopMatrix(); 
+    glPushMatrix();
       glTranslatef(-3, 0, 0);
          glutSolidCube(0.6);
-      glPopMatrix(); 
-        glPushMatrix();
+    glPopMatrix(); 
+    glPushMatrix();
       glTranslatef(1, 0, 0);
          glutSolidCube(0.6);
-      glPopMatrix(); 
-       glPushMatrix();
+    glPopMatrix(); 
+    glPushMatrix();
       glTranslatef(2, 0, 0);
          glutSolidCube(0.6);
-     glPopMatrix(); 
+    glPopMatrix(); 
      
-       glPushMatrix();
+    glPushMatrix();
       glTranslatef(3, 0, 0);
          glutSolidCube(0.6);
-     glPopMatrix(); 
+    glPopMatrix(); 
      /****Kraj gore*****/
       
       /*****Desnooooo*****/
-       glPushMatrix();
+    glPushMatrix();
       glTranslatef(3, 0, 1);
       glutSolidCube(0.6);
-      glPopMatrix(); 
+    glPopMatrix(); 
       
-       glPushMatrix();
+    glPushMatrix();
       glTranslatef(3, 0, 2);
       glutSolidCube(0.6);
-     glPopMatrix(); 
-       glPushMatrix();
+    glPopMatrix(); 
+    glPushMatrix();
       glTranslatef(3, 0, 3);
       glutSolidCube(0.6);
-      glPopMatrix(); 
+    glPopMatrix(); 
       
-       glPushMatrix();
+    glPushMatrix();
       glTranslatef(3, 0, 4);
       glutSolidCube(0.6);
-      glPopMatrix(); 
+    glPopMatrix(); 
       
-       glPushMatrix();
+    glPushMatrix();
       glTranslatef(3, 0, 5);
       glutSolidCube(0.6);
-      glPopMatrix(); 
+    glPopMatrix(); 
       
     
       /* Kraajj  Desnoooo*///
@@ -66,31 +67,31 @@ void kreirajTablu(){
       /********Doleee*********/
       
       
-      glPushMatrix();
-    glTranslatef(0, 0, 5);
+    glPushMatrix();
+        glTranslatef(0, 0, 5);
       glutSolidCube(0.6);
    glPopMatrix(); 
    
-     glPushMatrix();
-    glTranslatef(-1, 0, 5);
-      glutSolidCube(0.6);
+    glPushMatrix();
+        glTranslatef(-1, 0, 5);
+        glutSolidCube(0.6);
     glPopMatrix(); 
     
     glPushMatrix();
       glTranslatef(-2, 0, 5);
       glutSolidCube(0.6);
-       glPopMatrix(); 
+    glPopMatrix(); 
       
     
-       glPushMatrix();
+    glPushMatrix();
       glTranslatef(1, 0, 5);
       glutSolidCube(0.6);
-      glPopMatrix(); 
+    glPopMatrix(); 
       
-       glPushMatrix();
+    glPushMatrix();
       glTranslatef(2, 0, 5);
       glutSolidCube(0.6);
-     glPopMatrix(); 
+    glPopMatrix(); 
       
     
      
@@ -99,31 +100,31 @@ void kreirajTablu(){
   
   
   /*************LEVOOOO*************/
-      glPushMatrix();
+    glPushMatrix();
       glTranslatef(-3, 0, 1);
          glutSolidCube(0.6);
-      glPopMatrix(); 
+    glPopMatrix(); 
         
-       glPushMatrix();
+    glPushMatrix();
       glTranslatef(-3, 0, 2);
       glutSolidCube(0.6);
-     glPopMatrix(); 
+    glPopMatrix(); 
      
-       glPushMatrix();
+    glPushMatrix();
       glTranslatef(-3, 0, 3);
       glutSolidCube(0.6);
     glPopMatrix(); 
       
-       glPushMatrix();
+    glPushMatrix();
       glTranslatef(-3, 0, 4);
       glutSolidCube(0.6);
-      glPopMatrix(); 
+    glPopMatrix(); 
       
-       glPushMatrix();
+    glPushMatrix();
       glTranslatef(-3, 0, 5);
-        glColor3f(0, 0.7, 0.2);
+        glColor3f(0.1, 0.4, 0.2);
         glutSolidCube(0.6);
-     glPopMatrix(); 
+    glPopMatrix(); 
        
        
        /**************** Kraj LEVOOOOO*********/

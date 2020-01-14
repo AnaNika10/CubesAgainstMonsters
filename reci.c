@@ -6,29 +6,32 @@
 void iscrtajZivote(char *zivotistring, char *nizzivota){
    int n=strlen(nizzivota);
    int m=strlen(zivotistring);
-    glPushMatrix();
-        glColor3f(1,1,1);
+    
+        glPushAttrib(GL_CURRENT_BIT);
+        glColor3f(0,0,0);
+        
         glRasterPos3f(4,2,0);
 	    for (int i=0; i<m; i++)
 	    {
     		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24 , zivotistring[i]);
 	    }
-    glPopMatrix();
-    glPushMatrix();
-        glColor3f(1,1,1);
+	    glPopAttrib();
+  
+        glPushAttrib(GL_CURRENT_BIT);
+        glColor3f(0,0,0);
 	    glRasterPos3f(5.5,2,0);
 	    for (int i=0; i<n; i++)
 	    {
     		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24 , nizzivota[i]);
 	    }
-    glPopMatrix();
+       glPopAttrib();
 }
 
 void iscrtajGameOver(){
   
    char *word="Game over!";
    int n=strlen(word);
-   
+   glPushMatrix();
     
         glColor3f(0,0,0);
         glRasterPos3f(-4,4,0);
@@ -42,9 +45,9 @@ void iscrtajGameOver(){
 }
 void iscrtajCongrats(){
     
-   char *word="Congrats!";
+   char *word="CONGRATULATIONS!";
    int n=strlen(word);
-   
+   glPushMatrix();
     
         glColor3f(0,0,0);
         glRasterPos3f(-4,4,0);
@@ -59,8 +62,7 @@ void iscrtajCongrats(){
 void iscrtajPoruku(){
     char *word="Choose level (use 1,2,3)!";
    int n=strlen(word);
-   
-    
+   glPushMatrix();
         glColor3f(0,0,0);
         glRasterPos3f(-4,4,0);
 	    for (int i=0; i<n; i++)
