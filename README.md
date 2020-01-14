@@ -1,7 +1,7 @@
 # RG18-cubes-against-monsters
 Cubes against monsters
 
-##### Cilj igrice je napraviti ceo krug. Pomerate se zelenom kockicom. Ako se dodjete na mestu gde se nalazi loptica ili jedno mesto ispred nje treba se boriti. Za to se koristi crvena kockica. Ako se dobije broj 4, 5 ili 6 mozemo nastaviti dalje u suprotnom gubi se jedan zivot.
+##### Cilj igrice je napraviti ceo krug za plavim pionom. Pomerate se zelenom kockicom. Ako dodjete na mesto gde se nalazi loptica ili jedno mesto ispred nje treba se boriti. Za to se koristi crvena kockica. Ako se dobije broj 4, 5 ili 6 mozemo nastaviti dalje u suprotnom gubi se jedan zivot.
 <hr>
 
 #### Kontrole:
