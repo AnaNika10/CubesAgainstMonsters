@@ -1,5 +1,5 @@
 # RG18-cubes-against-monsters
-Cubes against monsters
+#### Pravila igre:
 
 * Cilj igrice je napraviti ceo krug za plavim pionom. 
 * Pomerate se zelenom kockicom za onoliko mesta koliko ste dobili na kockici.
