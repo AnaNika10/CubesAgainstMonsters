@@ -2,11 +2,11 @@
 Cubes against monsters
 
 ##### Cilj igrice je napraviti ceo krug za plavim pionom. 
-##### Pomerate se zelenom kockicom.
-      Ako dodjete na mesto gde se nalazi loptica ili jedno mesto ispred nje treba se boriti.
-      Ako se dobije broj koji bi pomerio piona na mesto neke od loptica automatski se pozicionira na jedno mesto ispred nje. 
-#### Za borbu se koristi crvena kockica. 
-       Ako se dobije broj 4, 5 ili 6 mozemo nastaviti dalje u suprotnom gubi se jedan zivot.
+##### *** Pomerate se zelenom kockicom.
+##### Ako dodjete na mesto gde se nalazi loptica ili jedno mesto ispred nje treba se boriti.
+##### Ako se dobije broj koji bi pomerio piona na mesto neke od loptica automatski se pozicionira na jedno mesto ispred nje. 
+#### *** Za borbu se koristi crvena kockica. 
+#### Ako se dobije broj 4, 5 ili 6 mozemo nastaviti dalje u suprotnom gubi se jedan zivot.
 #### Boja pozadine oznacava koju kockicu treba koristiti.
 #### Kockice treba "bacati" onda kad se animacije kretanja piona i padanja loptice zavrse.
 <hr>
