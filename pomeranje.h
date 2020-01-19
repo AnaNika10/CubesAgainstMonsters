@@ -6,5 +6,4 @@ typedef struct Tuple{
     int z;
 } tuple;
 int igraj(int broj,int pomeraj,int playable);
-
 #endif

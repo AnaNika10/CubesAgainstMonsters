@@ -18,6 +18,7 @@
 #define PI 3.14159265359
 void on_timer1(int id);
 void on_timer2(int id);
+void restartuj();
 /*Parametri animacije za pomeranje po X Y i Z osi*/
 float animation_parameterX=0;
 float animation_parameterY = 0;
@@ -33,8 +34,8 @@ int randombr1;
 int randombr2;
 int kockica;
 int pomeraj=0; //pozicija na koju treba da stignemo
-int *goaway; //niz koji kaze sta treba raditi sa lopticom
-int playable=1; //indikator za pomeranje
+int *goaway=NULL; //niz koji kaze sta treba raditi sa lopticom
+int playable=0; //indikator za pomeranje
 int mesto,mesto1,obrisi; //pozicije koje smo nasli i treba da obrisemo iz niza zamki
 int fight=0; //indikator za borbu
 int flagporuka=1; //indikator za iscrtavanje poruke
@@ -51,6 +52,8 @@ int lvl2[]={1,2,3,4,6,7,9,10,12,13,15,16,19,20};
 /*Niz loptica za treci nivo i niz polja koji predstavljaju prelazak na borbu (mesto loptice i mesto ispred)*/
 int lvl3_zamke[]={2,4,6,9,11,13,15,18,21};
 int lvl3[]={1,2,3,4,5,6,8,9,10,11,12,13,14,15,17,18,20,21};
+int lvl_zamke[10]; //niz zamki za trenutno pokrenut nivo
+int lvl_polja[20]; //niz opasnih polja za trenutno pokrenut nivo
 /* Deklaracije callback funkcija. */
 static void on_keyboard(unsigned char key, int x, int y);
 static void on_reshape(int width, int height);
@@ -111,13 +114,13 @@ static void on_display(void)
         iscrtajZivote(zivotistring,nizzivota);
     glPopMatrix();
     //Iscrtava poruku posle poraza
-    if(!zivoti){
+    if(!zivoti && !flagporuka){
         glPushMatrix(); 
         iscrtajGameOver();
         glPopMatrix();
     }
     //Iscrtava poruku posle pobede
-    if(pomeraj>=22)
+    if(pomeraj>=22 && !flagporuka)
     {
         glPushMatrix(); 
         iscrtajCongrats();
@@ -138,32 +141,31 @@ static void on_display(void)
         glDisable(GL_LIGHTING);
         glDisable(GL_LIGHT0);
         Kocke();
-        Tacke1(kockica,state_move); 
-        Tacke2(randombr2,state_attack);
+        Tacke1(kockica,state_attack); 
+        Tacke2(randombr2,state_move);
    glPopMatrix();
-   //Kreira tablu
+   //Ukljucujemo osvetljenje
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT0);
+    //Kreira tablu
     glPushMatrix();
-        glEnable(GL_DEPTH_TEST);
-        glEnable(GL_LIGHTING);
-       glEnable(GL_LIGHT0);
         kreirajTablu();
     glPopMatrix();
     //U zavisnosti od nivoa iscrtava cudovista
+    if(goaway!=NULL){
     glPushMatrix();
-        glEnable(GL_DEPTH_TEST);
-        glEnable(GL_LIGHTING);
-        glEnable(GL_LIGHT0);
         kreirajCudovista(lvl,goaway,animation_parameter_sphere);
     glPopMatrix();
-    //Crtanje piona i njegova animacija
+    }
+   
+     //Crtanje piona i njegova animacija    
     glPushMatrix();
-            glEnable(GL_DEPTH_TEST);
-            glEnable(GL_LIGHTING);
-            glEnable(GL_LIGHT0);
-            glTranslatef(animation_parameterX*1.2,0.35+1.5*fabs(sin(PI*animation_parameterY/360)), -animation_parameterZ*1.15);
-            kreirajPiona(-3,0,5);
+                glTranslatef(animation_parameterX*1.2,0.35+1.5*fabs(sin(PI*animation_parameterY/360)), -animation_parameterZ*1.15);
+                kreirajPiona(-3,0,5);
     glPopMatrix();
  
+     
   
     glutSwapBuffers();
 
@@ -175,19 +177,32 @@ static void on_keyboard(unsigned char key, int x, int y)
     case 27:
         exit(0);
         break;
+    case 'r':
+    case 'R':
+          restartuj();
+         break;
     case '1': //izaberi lvl 1
         lvl=1;
+        playable=1;
         flagporuka=0;
+        memcpy(lvl_zamke, lvl1_zamke, sizeof(lvl1_zamke));
+        memcpy(lvl_polja, lvl1,sizeof(lvl1));
         goaway=(int*)calloc(5,sizeof(int));
         break;
     case '2': //izaberi lvl 2
         lvl=2;
         flagporuka=0;
+        playable=1;
+        memcpy(lvl_zamke, lvl2_zamke, sizeof(lvl2_zamke));
+        memcpy(lvl_polja, lvl2,sizeof(lvl2));
         goaway=(int*)calloc(7,sizeof(int));
         break;
     case '3': //izaberi lvl 3
         lvl=3;
         flagporuka=0;
+        playable=1;
+        memcpy(lvl_zamke, lvl3_zamke, sizeof(lvl3_zamke));
+        memcpy(lvl_polja, lvl3,sizeof(lvl3));
         goaway=(int*)calloc(9,sizeof(int));
         break;
     case 'c':            
@@ -198,16 +213,17 @@ static void on_keyboard(unsigned char key, int x, int y)
         kockica=randombr1; //koji broj se postavlja na kockicu
         pomeraj=igraj(randombr1,pomeraj,playable); //izvrsi pomeranje za randombr1 polja
         
-    
+        
+        
         if(lvl==1){
         for(int i=0;i<5;i++)
-            if(pomeraj==lvl1_zamke[i])
+            if(pomeraj==lvl_zamke[i])
             { 
                 pomeraj--;    //ako se dobije mesto na kom se bas nalazi cudoviste vrati se za jedno polje
                 randombr1--;
             }
         for(int i=0;i<10;i++)
-            if(pomeraj==lvl1[i])
+            if(pomeraj==lvl_polja[i])
             {
                 playable=0; //mod za pomeranje se iskljucuje
                 fight=1; //fight mod se ukljucuje
@@ -216,13 +232,13 @@ static void on_keyboard(unsigned char key, int x, int y)
         }
         if(lvl==2){
         for(int i=0;i<7;i++)
-            if(pomeraj==lvl2_zamke[i])
+            if(pomeraj==lvl_zamke[i])
             { 
                 pomeraj--;   //ako se dobije mesto na kom se bas nalazi cudoviste vrati se za jedno polje
                 randombr1--;
             }
         for(int i=0;i<13;i++)
-            if(pomeraj==lvl2[i])
+            if(pomeraj==lvl_polja[i])
             {
                 playable=0;  //mod za pomeranje se iskljucuje
                 fight=1;   //fight mod se ukljucuje
@@ -231,13 +247,13 @@ static void on_keyboard(unsigned char key, int x, int y)
         }
         if(lvl==3){
         for(int i=0;i<9;i++)
-            if(pomeraj==lvl3_zamke[i])
+            if(pomeraj==lvl_zamke[i])
             { 
                 pomeraj--;   //ako se dobije mesto na kom se bas nalazi cudoviste vrati se za jedno polje
                 randombr1--;
             }
         for(int i=0;i<18;i++)
-            if(pomeraj==lvl3[i])
+            if(pomeraj==lvl_polja[i])
             {
                 playable=0;   //mod za pomeranje se iskljucuje
                 
@@ -248,6 +264,11 @@ static void on_keyboard(unsigned char key, int x, int y)
        
         
         }
+        //Namesta kockicu da u slucaju kad dodje do kraja da ne bi skakao u mestu
+        if(pomeraj>=22){
+           randombr1-=pomeraj-22;
+        }
+        
         /*  Pokretanje animacije*/
         if (!animation_ongoing1) {
                 animation_ongoing1=1;
@@ -270,8 +291,8 @@ static void on_keyboard(unsigned char key, int x, int y)
                 switch(lvl){
                     case 1:
                         //pronadji trenutnu poziciju posle borbe da bi ustavio na koju lopticu pokrenuti animaciju
-                        mesto=pronadji(lvl1_zamke,5,pomeraj); 
-                        mesto1=pronadji(lvl1_zamke,5,pomeraj+1);
+                        mesto=pronadji(lvl_zamke,5,pomeraj); 
+                        mesto1=pronadji(lvl_zamke,5,pomeraj+1);
                         if(mesto>mesto1)
                             obrisi=mesto;
                         else
@@ -283,20 +304,20 @@ static void on_keyboard(unsigned char key, int x, int y)
                         glutTimerFunc(TIMER_INTERVAL2, on_timer2, TIMER_ID1);
                         }
                         // obrisi tu lopticu iz trenutnih zamki da mozemo da idemo dalje
-                        if(obrisi_element(lvl1_zamke,5,pomeraj)){
-                            obrisi_element(lvl1,10,pomeraj);
+                        if(obrisi_element(lvl_zamke,5,pomeraj)){
+                            obrisi_element(lvl_polja,10,pomeraj);
                             
                         }
-                        else if(obrisi_element(lvl1_zamke,5,pomeraj+1)){
-                        obrisi_element(lvl1,10,pomeraj);
-                        obrisi_element(lvl1,10,pomeraj+1);
+                        else if(obrisi_element(lvl_zamke,5,pomeraj+1)){
+                        obrisi_element(lvl_polja,10,pomeraj);
+                        obrisi_element(lvl_polja,10,pomeraj+1);
                         
                         }
                      
                         break;     
                     case 2:
-                        mesto=pronadji(lvl2_zamke,7,pomeraj);
-                        mesto1=pronadji(lvl2_zamke,7,pomeraj+1);
+                        mesto=pronadji(lvl_zamke,7,pomeraj);
+                        mesto1=pronadji(lvl_zamke,7,pomeraj+1);
                         if(mesto>mesto1)
                             obrisi=mesto;
                         else
@@ -307,17 +328,17 @@ static void on_keyboard(unsigned char key, int x, int y)
                                animation_parameter_sphere=0.7;
                         glutTimerFunc(TIMER_INTERVAL2, on_timer2, TIMER_ID1);
                         }
-                        if(obrisi_element(lvl2_zamke,7,pomeraj))
-                            obrisi_element(lvl2,14,pomeraj);
+                        if(obrisi_element(lvl_zamke,7,pomeraj))
+                            obrisi_element(lvl_polja,14,pomeraj);
                         else{
-                        obrisi_element(lvl2_zamke,7,pomeraj+1);
-                        obrisi_element(lvl2,14,pomeraj+1);
-                        obrisi_element(lvl2,14,pomeraj);
+                        obrisi_element(lvl_zamke,7,pomeraj+1);
+                        obrisi_element(lvl_polja,14,pomeraj+1);
+                        obrisi_element(lvl_polja,14,pomeraj);
                         } 
                         break;
                     case 3: 
-                        mesto=pronadji(lvl3_zamke,9,pomeraj);
-                        mesto1=pronadji(lvl3_zamke,9,pomeraj+1);
+                        mesto=pronadji(lvl_zamke,9,pomeraj);
+                        mesto1=pronadji(lvl_zamke,9,pomeraj+1);
                         if(mesto>mesto1)
                             obrisi=mesto;
                         else
@@ -328,12 +349,12 @@ static void on_keyboard(unsigned char key, int x, int y)
                                animation_parameter_sphere=0.7;
                         glutTimerFunc(TIMER_INTERVAL2, on_timer2, TIMER_ID1);
                         }
-                        if(obrisi_element(lvl3_zamke,9,pomeraj))
-                            obrisi_element(lvl3,18,pomeraj);
+                        if(obrisi_element(lvl_zamke,9,pomeraj))
+                            obrisi_element(lvl_polja,18,pomeraj);
                         else{
-                        obrisi_element(lvl3_zamke,9,pomeraj+1);
-                        obrisi_element(lvl3,18,pomeraj+1);
-                        obrisi_element(lvl3,18,pomeraj);
+                        obrisi_element(lvl_zamke,9,pomeraj+1);
+                        obrisi_element(lvl_polja,18,pomeraj+1);
+                        obrisi_element(lvl_polja,18,pomeraj);
                         } 
                         break;
                     default:
@@ -452,4 +473,20 @@ void on_timer2(int id) {
    if (animation_ongoing1) {
         glutTimerFunc(TIMER_INTERVAL2, on_timer2, TIMER_ID1);
     } 
+}
+void restartuj(){
+    
+   animation_parameterX=0;
+   animation_parameterY = 0;
+   animation_parameterZ = 0;
+   animation_parameter_sphere=0.7;
+   putanja=0;
+   fight=0;
+   zivoti=3;
+   playable=0;
+   flagporuka=1;
+  pomeraj=0;
+ nizzivota="| | |  ";
+ glClearColor(0.25, 1, 0.25, 0);
+ goaway=NULL;
 }

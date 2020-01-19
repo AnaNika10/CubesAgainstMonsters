@@ -12,7 +12,7 @@
 #define FILENAME1 "8.bmp"
 
 //identifikatori tekstura
-static GLuint names[1];
+static GLuint names[2];
 
 void initialize(void)
 {
@@ -51,7 +51,7 @@ void initialize(void)
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB,
                  image->width, image->height, 0,
                  GL_RGB, GL_UNSIGNED_BYTE, image->pixels);
-
+    glBindTexture(GL_TEXTURE_2D, 0);
     //kreira se druga tekstura
     image_read(image, FILENAME1);
 

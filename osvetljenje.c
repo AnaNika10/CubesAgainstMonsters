@@ -46,9 +46,6 @@ void postavi_osvetljenje(){
     glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, specular_coeffs);
     glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, shininess);
 
-      
-    glEnable(GL_LIGHTING); //ukljcujemo osvetljenje
-    glEnable(GL_LIGHT0);
     glEnable(GL_COLOR_MATERIAL); 
     glEnable(GL_NORMALIZE);
     glShadeModel(GL_SMOOTH);

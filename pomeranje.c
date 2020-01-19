@@ -15,3 +15,4 @@ int igraj(int broj,int pomeraj,int playable){
 }
 
 
+
