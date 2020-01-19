@@ -1,7 +1,7 @@
 # RG18-cubes-against-monsters
 #### Pravila igre:
 
-* Cilj igrice je napraviti ceo krug za plavim pionom. 
+* Cilj igrice je obici celu tablu i doci na pocetnu poziciju uz pomoc plavog piona.
 * Pomerate se zelenom kockicom za onoliko mesta koliko ste dobili na kockici.
 * Ako se dobije broj koji bi pomerio piona na mesto neke od loptica automatski se pozicionirate na jedno mesto ispred loptice. (za jedan broj manje nego na kockici)
 * Kada se nadjete na mestu ispred loptice ne mozete ici dalje zelenom kockicom jer treba da se borite. 
