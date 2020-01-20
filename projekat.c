@@ -27,12 +27,11 @@ float animation_parameterZ = 0;
 float animation_parameter_sphere=0.7;
 int putanja=0;
 int animation_ongoing1 = 0;
-int animation_ongoing2 = 0;
 static int window_width, window_height;
 int lvl=0; //indikator nivoa
 int randombr1;
 int randombr2;
-int kockica;
+int kockica; //promenljiva koja pokazuje koji broj se prikazuje na kockici
 int pomeraj=0; //pozicija na koju treba da stignemo
 int *goaway=NULL; //niz koji kaze sta treba raditi sa lopticom
 int playable=0; //indikator za pomeranje
@@ -205,11 +204,9 @@ static void on_keyboard(unsigned char key, int x, int y)
         memcpy(lvl_polja, lvl3,sizeof(lvl3));
         goaway=(int*)calloc(9,sizeof(int));
         break;
-    case 'c':            
-        if(playable && !animation_ongoing1 && lvl)
+    case 'c':
+        if(playable && !animation_ongoing1 && lvl){
             randombr1=random_num(); //odaberi slucajan broj
-        else 
-            randombr1=0;
         kockica=randombr1; //koji broj se postavlja na kockicu
         pomeraj=igraj(randombr1,pomeraj,playable); //izvrsi pomeranje za randombr1 polja
         
@@ -274,13 +271,11 @@ static void on_keyboard(unsigned char key, int x, int y)
                 animation_ongoing1=1;
             glutTimerFunc(TIMER_INTERVAL1, on_timer1, TIMER_ID0);
             }
-    
+        }
         break;
     case 'v':
-        if(!playable && zivoti && lvl)
+        if(!playable && zivoti && lvl && !animation_ongoing1){
             randombr2=random_num();
-        else 
-            randombr2=0;
         if(fight==1)
         {    
             if(randombr2>=4)  // u slucaju dobijanja broja veceg od cetiri nastavi dalje
@@ -375,6 +370,7 @@ static void on_keyboard(unsigned char key, int x, int y)
                 }
             }
         }
+    }
         break;
     }
    
@@ -474,6 +470,7 @@ void on_timer2(int id) {
         glutTimerFunc(TIMER_INTERVAL2, on_timer2, TIMER_ID1);
     } 
 }
+//fja resetuje sve parametre za pocetak nove igre
 void restartuj(){
     
    animation_parameterX=0;
@@ -485,6 +482,8 @@ void restartuj(){
    zivoti=3;
    playable=0;
    flagporuka=1;
+   kockica=0;
+   randombr2=0;
   pomeraj=0;
  nizzivota="| | |  ";
  glClearColor(0.25, 1, 0.25, 0);
