@@ -26,4 +26,5 @@
 <hr>
 
 #### Pokretanje
-Pozicionirati se u ```.../RG18-cubes-against-monsters``` i pokrenuti komandu  ```make```. Zatim pokrenuti ```./projekat```
+* Projekat preuzeti pomoću komande `git clone https://github.com/MATF-RG19/RG18-cubes-against-monsters.git`
+* Pozicionirati se u ```.../RG18-cubes-against-monsters``` i pokrenuti komandu  ```make```. Zatim pokrenuti ```./projekat```
