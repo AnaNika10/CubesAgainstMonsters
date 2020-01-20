@@ -3,7 +3,7 @@
 
 * Cilj igrice je obici celu tablu i doci na pocetnu poziciju uz pomoc plavog piona.
 * Pomerate se zelenom kockicom za onoliko mesta koliko ste dobili na kockici.
-* Ako se dobije broj koji bi pomerio piona na mesto neke od loptica automatski se pozicionirate na jedno mesto ispred loptice. (za jedan broj manje nego na kockici)
+* Ako se dobije broj koji bi pomerio piona na mesto neke od loptica automatski se pozicionirate na jedno mesto iza. (za jedan broj manje od dobijenog broja na kockici)
 * Kada se nadjete na mestu ispred loptice ne mozete ici dalje zelenom kockicom jer treba da se borite. 
 *  Za borbu se koristi crvena kockica. 
 *  Ako se dobije broj 4, 5 ili 6 mozemo nastaviti dalje u suprotnom gubi se 1 od 3 zivota. Ne mozete nastaviti dalje dokle god ne dobijete 4, 5 ili 6.
