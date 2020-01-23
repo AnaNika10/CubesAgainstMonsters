@@ -29,6 +29,7 @@ int putanja=0;
 int animation_ongoing1 = 0;
 static int window_width, window_height;
 int lvl=0; //indikator nivoa
+int r=0; // indikator da li moze da se promeni nivo (tj ili nismo zapoceli igru ili smo je restartovali u suprotnom promena nivoa nece biti registrovana)
 int randombr1;
 int randombr2;
 int kockica; //promenljiva koja pokazuje koji broj se prikazuje na kockici
@@ -181,28 +182,37 @@ static void on_keyboard(unsigned char key, int x, int y)
           restartuj();
          break;
     case '1': //izaberi lvl 1
+        if(!r){
+ 	r=1;
         lvl=1;
         playable=1;
         flagporuka=0;
         memcpy(lvl_zamke, lvl1_zamke, sizeof(lvl1_zamke));
         memcpy(lvl_polja, lvl1,sizeof(lvl1));
         goaway=(int*)calloc(5,sizeof(int));
+         }
         break;
     case '2': //izaberi lvl 2
+ 	if(!r){
+	r=1;
         lvl=2;
         flagporuka=0;
         playable=1;
         memcpy(lvl_zamke, lvl2_zamke, sizeof(lvl2_zamke));
         memcpy(lvl_polja, lvl2,sizeof(lvl2));
         goaway=(int*)calloc(7,sizeof(int));
+        }
         break;
     case '3': //izaberi lvl 3
+	 if(!r){
+	r=1;
         lvl=3;
         flagporuka=0;
         playable=1;
         memcpy(lvl_zamke, lvl3_zamke, sizeof(lvl3_zamke));
         memcpy(lvl_polja, lvl3,sizeof(lvl3));
         goaway=(int*)calloc(9,sizeof(int));
+	}
         break;
     case 'c':
         if(playable && !animation_ongoing1 && lvl){
@@ -463,7 +473,7 @@ void on_timer2(int id) {
             goaway[obrisi]=2;  //kada se zavrsi animacija prestani da iscrtavas lopticu           
             
         }
-        animation_parameter_sphere-=0.5;  
+        animation_parameter_sphere-=1;  
     }
     glutPostRedisplay();
    if (animation_ongoing1) {
@@ -472,7 +482,7 @@ void on_timer2(int id) {
 }
 //fja resetuje sve parametre za pocetak nove igre
 void restartuj(){
-    
+   r=0; 
    animation_parameterX=0;
    animation_parameterY = 0;
    animation_parameterZ = 0;
