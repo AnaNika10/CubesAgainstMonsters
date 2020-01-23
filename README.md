@@ -9,6 +9,7 @@
 *  Ako se dobije broj 4, 5 ili 6 mozemo nastaviti dalje u suprotnom gubi se 1 od 3 zivota. Ne mozete nastaviti dalje dokle god ne dobijete 4, 5 ili 6.
 *  Boja pozadine oznacava koju kockicu treba koristiti.
 *  Kockice treba "bacati" onda kad se animacije kretanja piona i padanja loptice zavrse.
+*  Ako zelite da pokrenete neki drugi nivo ili pocnete iz pocetka trenutni restartujte igricu i izaberite nivo.
 <hr>
 
 #### Kontrole:
