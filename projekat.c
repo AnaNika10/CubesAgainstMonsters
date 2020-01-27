@@ -274,6 +274,7 @@ static void on_keyboard(unsigned char key, int x, int y)
         //Namesta kockicu da u slucaju kad dodje do kraja da ne bi skakao u mestu
         if(pomeraj>=22){
            randombr1-=pomeraj-22;
+           playable=0;
         }
         
         /*  Pokretanje animacije*/
@@ -284,7 +285,7 @@ static void on_keyboard(unsigned char key, int x, int y)
         }
         break;
     case 'v':
-        if(!playable && zivoti && lvl && !animation_ongoing1){
+        if(fight && zivoti && lvl && !animation_ongoing1){
             randombr2=random_num();
         if(fight==1)
         {    
