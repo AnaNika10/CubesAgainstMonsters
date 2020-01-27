@@ -376,7 +376,6 @@ static void on_keyboard(unsigned char key, int x, int y)
                 nizzivota+=2;
                 }
                 if(!zivoti){
-                //printf("Game over!");
                 nizzivota=" ";
                 }
             }
